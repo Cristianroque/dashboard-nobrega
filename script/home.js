@@ -20,56 +20,107 @@ function renderLineChart() {
       height: 300,
       toolbar: { show: false },
       animations: { enabled: true },
-      fontFamily: 'Poppins, sans-serif'
+      fontFamily: 'Poppins, sans-serif',
+      zoom: { enabled: false },
+      background: 'transparent'
     },
     stroke: {
-      width: 3,
-      curve: 'smooth'
+      width: 4,  // Linha mais grossa
+      curve: 'smooth',
+      colors: ['#9B27B0']
+    },
+    grid: {
+      show: true,
+      borderColor: '#f0f0f0',
+      strokeDashArray: 0,
+      position: 'back',
+      xaxis: {
+        lines: {
+          show: false
+        }
+      }, 
+      yaxis: {
+        lines: {
+          show: true,
+          opacity: 0.3
+        }
+      }
     },
     xaxis: {
       categories: ['1', '5', '10', '15', '25', '30'],
       title: { 
         text: 'Dias',
         style: {
-          fontFamily: 'Poppins, sans-serif'
+          fontFamily: 'Poppins, sans-serif',
+          color: '#666',
+          fontSize: '12px'
         } 
       },
       labels: { 
         style: { 
-          colors: '#9A2EB1',
-          fontFamily: 'Poppins, sans-serif'
+          colors: '#666',
+          fontFamily: 'Poppins, sans-serif',
+          fontSize: '11px'
         } 
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
       }
     },
     yaxis: {
       title: { 
         text: 'Valor (R$)',
         style: {
-          fontFamily: 'Poppins, sans-serif'
+          fontFamily: 'Poppins, sans-serif',
+          color: '#666',
+          fontSize: '12px'
         } 
       },
       labels: {
-        formatter: v => 'R$' + v.toLocaleString('pt-BR'),
+        formatter: v => 'R$' + (v/1000).toFixed(0) + 'k',
         style: {
-          fontFamily: 'Poppins, sans-serif'
+          fontFamily: 'Poppins, sans-serif',
+          colors: '#666',
+          fontSize: '11px'
         }
-      }
+      },
+      min: 0,
+      max: 40000,
+      tickAmount: 4
     },
-    colors: ['#B832F9'],
+    colors: ['#9B27B0'],
     markers: {
-      size: 4,
+      size: 6,  // Marcadores maiores
       colors: ['#fff'],
-      strokeColors: '#7E1B9A',
-      strokeWidth: 2
+      strokeColors: '#9B27B0',
+      strokeWidth: 3,  // Borda mais grossa nos marcadores
+      hover: {
+        size: 8
+      }
     },
     fill: {
       type: 'gradient',
       gradient: {
-        shade: 'light',
+        shade: 'dark',
         type: "vertical",
         gradientToColors: ["#E1BEE7"],
-        opacityFrom: 0.4,
-        opacityTo: 0.1
+        stops: [0, 80, 100],
+        opacityFrom: 0.8,
+        opacityTo: 0.2
+      }
+    },
+    tooltip: {
+      style: {
+        fontFamily: 'Poppins, sans-serif',
+        fontSize: '12px'
+      },
+      y: {
+        formatter: function(value) {
+          return "R$" + value.toLocaleString('pt-BR');
+        }
       }
     }
   };

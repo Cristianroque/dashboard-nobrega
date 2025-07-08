@@ -17,30 +17,18 @@ main{
 }
 .name-user{
     display: flex;
-    align-items: flex-start;
-    width: 65%;
-}
-.name-user h3{
-    margin: 1ch;
-}
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
+    height: 100%;
 
+}
 .UserInfos{
     width: 40%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-.ImgsUser{
-    width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.ImgsUser img:hover{
-    cursor: pointer;
 }
 
 #perfil{

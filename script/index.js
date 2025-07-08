@@ -1,3 +1,8 @@
+function togglePassword() {
+  const input = document.getElementById("password");
+  input.type = input.type === "password" ? "text" : "password";
+}
+
 const main = document.querySelector('main');
 
 const rotas = {
@@ -79,25 +84,33 @@ async function atualizarRota() {
 
   if (rotas[rota]) {
     const { html, js } = rotas[rota];
-    main.innerHTML = 'Carregando...';
-
+    main.classList.add("mainLoading")
+    main.innerHTML = `
+    <div class="spinner-container">
+    <div class="spinner"></div>
+    </div>
+    `;
     const conteudo = await carregarArquivo(html);
-    main.innerHTML = conteudo;
 
-    document.querySelectorAll('script[data-dinamico]').forEach(el => el.remove());
+    setTimeout(() => {
+      main.classList.remove("mainLoading")
+      main.innerHTML = conteudo;
 
-    const script = document.createElement("script");
-    script.src = js;
-    script.setAttribute("data-dinamico", "true");
-    script.onload = () => {
-      if (rota === 'home') {
-        setTimeout(() => {
-          renderLineChart();
-          renderDonutChart();
-        }, 100);
-      }
-    };
-    document.body.appendChild(script);
+      document.querySelectorAll('script[data-dinamico]').forEach(el => el.remove());
+
+      const script = document.createElement("script");
+      script.src = js;
+      script.setAttribute("data-dinamico", "true");
+      script.onload = () => {
+        if (rota === 'home') {
+          setTimeout(() => {
+            renderLineChart();
+            renderDonutChart();
+          }, 100);
+        }
+      };
+      document.body.appendChild(script);
+    }, 1000)
   } else {
     main.innerHTML = "<p>Página não encontrada.</p>";
   }

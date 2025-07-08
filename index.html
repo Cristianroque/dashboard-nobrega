@@ -1,69 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nobréga - Dashboard</title>
-  <link rel="stylesheet" href="./assets/style/style.css" />
-  <link rel="shortcut icon" href="./assets/imgs/favicon NÓBREGA.ico" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style/login.css">
 </head>
-
 <body>
-  <div class="menu">
-    <div class="logo-menu">
-      <img width="60%" src="./assets/imgs/MANUAL NOBREGA 1.svg" alt="Logo" />
-    </div>
-    <ul>
-      <li>
-        <a id="btnInicial" href="#/home" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/chart.png" alt="" />
-          Tela inicial
-        </a>
-        <img id="IndicatorInicial" src="./assets/imgs/icons/Indicator.png" alt="Indicador" />
-      </li>
-      <li>
-        <a id="btnProdutos" href="#/products" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/case.png" alt="" />
-          Produtos
-        </a>
-        <img id="IndicatorProdutos" src="./assets/imgs/icons/Indicator.png" alt="Indicador" />
-      </li>
-      <li>
-        <a id="btnPedidos" href="#/orders" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/user.png" alt="" />
-          Pedidos
-        </a>
-        <img id="IndicatorPedidos" src="./assets/imgs/icons/Indicator.png" alt="Indicador" />
-      </li>
-      <li>
-        <a id="btnVendas" href="#/checkout" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/checkout.png" alt="" />
-          Vendas
-        </a>
-        <img id="IndicatorVendas" src="./assets/imgs/icons/Indicator.png" alt="Indicador" />
-      </li>
-      <li>
-        <a id="btnConfiguration" href="#/config" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/settings.png" alt="" />
-          Configurações
-        </a>
-        <img id="IndicatorConfiguration" src="./assets/imgs/icons/Indicator.png" alt="Indicador" />
-      </li>
-      <li>
-        <a id="btnSair" href="#/login" style="display:flex; align-items:center; gap: 10px;">
-          <img src="./assets/imgs/icons/logout.png" alt="" />
-          Sair
-        </a>
-      </li>
-    </ul>
-  </div>
+  <div class="login-container">
+    <img src="./assets/imgs/MANUAL NOBREGA 1.svg" alt="Logo" class="logo">
+    <h2>Nóbrega - Login</h2>
+      <label for="username">Usuário</label>
+      <input type="text" id="username" placeholder="Digite seu usuário" required>
 
-  <main></main>
+      <label for="password">Senha</label>
+      <div class="password-container">
+        <input type="password" id="password" placeholder="Digite sua senha" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+
+      <a href="./app.html"><button type="submit" class="btn">Entrar</button></a>
+  </div>
 
   <script src="./script/index.js"></script>
 </body>
-
 </html>
