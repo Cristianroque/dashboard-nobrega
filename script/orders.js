@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   if (window.__PEDIDOS_APP__) {
@@ -21,7 +21,7 @@
       pedidos: []
     },
 
-    init: function() {
+    init: function () {
       if (this.state.initialized) {
         console.warn('[Pedidos] Já inicializado');
         return this.cleanup().then(() => this._initialize());
@@ -30,15 +30,25 @@
     },
 
     // Inicialização interna
-    _initialize: function() {
+    _initialize: function () {
       console.log('[Pedidos] Iniciando módulo...');
-      
+
       return this._loadElements()
         .then(() => this._loadData())
         .then(() => this._setupEvents())
         .then(() => {
           this.state.initialized = true;
           this.render();
+
+          // Inicializa o AOS aqui depois de renderizar
+          if (window.AOS) {
+            window.AOS.init({
+              duration: 800, // duração da animação em ms
+              easing: 'ease-in-out',
+              once: true // anima uma vez só
+            });
+          }
+
           console.log('[Pedidos] Módulo pronto');
         })
         .catch(error => {
@@ -48,7 +58,7 @@
     },
 
     // Carrega elementos DOM
-    _loadElements: function() {
+    _loadElements: function () {
       return new Promise((resolve, reject) => {
         this.elements.container = document.getElementById('pedidosContainer');
         this.elements.searchInput = document.getElementById('searchInput');
@@ -65,7 +75,7 @@
     },
 
     // Carrega dados
-    _loadData: function() {
+    _loadData: function () {
       return new Promise((resolve) => {
         try {
           this.data.pedidos = [{
@@ -89,12 +99,12 @@
     },
 
     // Configura eventos
-    _setupEvents: function() {
+    _setupEvents: function () {
       return new Promise((resolve) => {
         if (this.elements.searchInput) {
           this.elements.searchInput.removeEventListener('input', this._handleSearch);
           this.elements.searchInput.addEventListener(
-            'input', 
+            'input',
             this._handleSearch.bind(this)
           );
         }
@@ -103,7 +113,7 @@
     },
 
     // Renderização
-    render: function(pedidos = this.data.pedidos) {
+    render: function (pedidos = this.data.pedidos) {
       if (!this.elements.container) return;
 
       try {
@@ -117,7 +127,7 @@
     },
 
     // Cria HTML do pedido
-    _createPedidoHTML: function(pedido) {
+    _createPedidoHTML: function (pedido) {
       return `
         <div class="pedido-card">
           <div class="pedido-img">Capa</div>
@@ -134,17 +144,17 @@
     },
 
     // Manipulador de busca
-    _handleSearch: function(event) {
+    _handleSearch: function (event) {
       const termo = event.target.value.toLowerCase();
-      const resultados = this.data.pedidos.filter(pedido => 
-        pedido.vendedor.toLowerCase().includes(termo) || 
+      const resultados = this.data.pedidos.filter(pedido =>
+        pedido.vendedor.toLowerCase().includes(termo) ||
         pedido.personalizacao.toLowerCase().includes(termo)
       );
       this.render(resultados);
     },
 
     // Formatação de data
-    _formatDate: function(dateString) {
+    _formatDate: function (dateString) {
       try {
         return new Date(dateString).toLocaleDateString('pt-BR');
       } catch {
@@ -153,7 +163,7 @@
     },
 
     // Limpeza antes de reinicializar
-    cleanup: function() {
+    cleanup: function () {
       return new Promise((resolve) => {
         if (this.elements.searchInput) {
           this.elements.searchInput.removeEventListener('input', this._handleSearch);
@@ -164,7 +174,7 @@
     },
 
     // Tratamento de retentativa
-    _handleRetry: function() {
+    _handleRetry: function () {
       if (this.state.retryCount < this.config.maxRetries) {
         this.state.retryCount++;
         console.warn(`[Pedidos] Tentativa ${this.state.retryCount} de ${this.config.maxRetries}`);
@@ -175,7 +185,7 @@
     },
 
     // Exibe erro
-    _showError: function() {
+    _showError: function () {
       if (this.elements.container) {
         this.elements.container.innerHTML = `
           <div class="pedido-error">
