@@ -29,7 +29,10 @@ const rotas = {
   login: {
     html: 'pages/login.html',
     js: 'script/login.js'
-  }
+  }, 
+  newOrder: { 
+    html: 'pages/newOrder.html', 
+    js: 'script/newOrder.js' }
 };
 
 function esconderIndicadores() {
@@ -37,7 +40,6 @@ function esconderIndicadores() {
     ind.style.visibility = 'hidden';
   });
 
-  // Só aplica cor aos links com id começando com btn
   document.querySelectorAll('a[id^="btn"]').forEach(link => {
     link.style.color = '#7C8DB5';
   });
